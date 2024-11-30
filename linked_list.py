@@ -35,13 +35,17 @@ class SinglyLinkedList:
             self.head = new_node
         self.length += 1
 
-        
+    def print_list(self) -> None:
+        current = self.head
+        while current:
+            print(current.value)
+            current = current.next
+
 if __name__ == "__main__":
     singly_linked_list = SinglyLinkedList()
     singly_linked_list.append(1)
-    singly_linked_list.append(2)
     singly_linked_list.append(3)
+    singly_linked_list.append(2)
     singly_linked_list.prepend(0)
-    print(singly_linked_list.head.next.value)
-    print(singly_linked_list.tail.value)
-    print(singly_linked_list.length)
+    singly_linked_list.prepend(4)
+    singly_linked_list.print_list()
