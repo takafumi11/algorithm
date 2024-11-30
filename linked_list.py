@@ -35,6 +35,29 @@ class SinglyLinkedList:
             self.head = new_node
         self.length += 1
 
+    def remove(self, value: int) -> None:
+        current_node = self.head
+        if current_node and current_node.value == value:
+            self.head = current_node.next
+            current_node = None
+            return
+        
+        previous_node = None
+        while current_node and current_node.value != value:
+            previous_node = current_node
+            current_node = current_node.next
+
+        # if the value is not found
+        if current_node is None:
+            return
+        
+        # if the value is found
+        if current_node and current_node.value == value:
+            previous_node.next = current_node.next
+            current_node = None
+            return
+        self.length -= 1
+    
     def print_list(self) -> None:
         current = self.head
         while current:
@@ -48,4 +71,5 @@ if __name__ == "__main__":
     singly_linked_list.append(2)
     singly_linked_list.prepend(0)
     singly_linked_list.prepend(4)
+    singly_linked_list.remove(3)
     singly_linked_list.print_list()
