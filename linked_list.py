@@ -64,12 +64,52 @@ class SinglyLinkedList:
             print(current.value)
             current = current.next
 
+
+    def reverse_iterative(self) -> None:
+        previous_node = None
+        current_node = self.head
+        self.tail = self.head
+        
+        while current_node:
+            next_node = current_node.next
+
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+        
+        self.head = previous_node
+
+    def reverse_recursive(self) -> None:
+        previous_node = None
+        current_node = self.head
+        self.tail = self.head
+
+        def _reverse_recursive(current_node: Node, previous_node: Node) -> Node:
+            if not current_node:
+                return previous_node
+
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+
+            return _reverse_recursive(current_node, previous_node)
+
+        self.head = _reverse_recursive(current_node, previous_node)
+
+
 if __name__ == "__main__":
     singly_linked_list = SinglyLinkedList()
     singly_linked_list.append(1)
-    singly_linked_list.append(3)
     singly_linked_list.append(2)
+    singly_linked_list.append(3)
     singly_linked_list.prepend(0)
-    singly_linked_list.prepend(4)
     singly_linked_list.remove(3)
     singly_linked_list.print_list()
+    print("####### Reverse Iterative")
+    singly_linked_list.reverse_recursive()
+    singly_linked_list.print_list()
+    print("####### Rverse Recursive")
+    singly_linked_list.reverse_iterative()
+    singly_linked_list.print_list()
+    
